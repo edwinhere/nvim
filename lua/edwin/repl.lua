@@ -240,26 +240,19 @@ vim.keymap.set('n', '<leader>am', send_last_message_to_aider, { silent = true, d
 
 -- Function to add telescope grep results to aider
 local function add_telescope_grep_results_to_aider()
-    -- Get telescope's current picker using actions.state
-    local actions_state = require('telescope.actions.state')
-    local current_picker = actions_state.get_current_picker()
+    local actions = require('telescope.actions')
+    local action_state = require('telescope.actions.state')
+    local current_picker = action_state.get_current_picker()
     
     if not current_picker then
         vim.notify("No active telescope picker", vim.log.levels.ERROR)
         return
     end
 
-    -- Get all selected entries (or current entry if none selected)
-    local selections = current_picker:get_multi_selection()
-    if #selections == 0 then
-        local entry = current_picker:get_selection()
-        if entry then
-            selections = {entry}
-        end
-    end
-
-    if #selections == 0 then
-        vim.notify("No files selected", vim.log.levels.WARN)
+    -- Get the current selection
+    local entry = action_state.get_selected_entry()
+    if not entry then
+        vim.notify("No file selected", vim.log.levels.WARN)
         return
     end
 
@@ -278,18 +271,14 @@ local function add_telescope_grep_results_to_aider()
         vim.cmd('sleep 500m') -- Wait for REPL to start
     end
 
-    -- Send files to aider
-    for _, selection in ipairs(selections) do
-        -- Get the filename from the selection
-        local filename = selection.filename or selection[1]
-        if filename then
-            vim.cmd(string.format('REPLExec $aider /add %s', filename))
-            vim.cmd('sleep 50m') -- Small delay between adds
-        end
+    -- Send file to aider
+    local filename = entry.filename or entry[1]
+    if filename then
+        vim.cmd(string.format('REPLExec $aider /add %s', filename))
     end
 
     -- Close telescope after sending
-    current_picker:close()
+    actions.close(current_picker.prompt_bufnr)
 end
 
 -- Return the module with functions exposed
