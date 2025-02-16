@@ -240,9 +240,10 @@ vim.keymap.set('n', '<leader>am', send_last_message_to_aider, { silent = true, d
 
 -- Function to add telescope grep results to aider
 local function add_telescope_grep_results_to_aider()
-    -- Get telescope's current picker
-    local telescope_state = require('telescope.actions.state')
-    local current_picker = telescope_state.get_current_picker(vim.api.nvim_get_current_buf())
+    -- Get telescope's current picker using actions.state
+    local actions_state = require('telescope.actions.state')
+    local current_picker = actions_state.get_current_picker()
+    
     if not current_picker then
         vim.notify("No active telescope picker", vim.log.levels.ERROR)
         return
