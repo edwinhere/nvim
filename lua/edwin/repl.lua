@@ -240,16 +240,11 @@ vim.keymap.set('n', '<leader>am', send_last_message_to_aider, { silent = true, d
 
 -- Function to add telescope grep results to aider
 local function add_telescope_grep_results_to_aider()
-    local actions = require('telescope.actions')
     local action_state = require('telescope.actions.state')
-    local current_picker = action_state.get_current_picker()
+    local actions = require('telescope.actions')
+    local bufnr = vim.api.nvim_get_current_buf()
     
-    if not current_picker then
-        vim.notify("No active telescope picker", vim.log.levels.ERROR)
-        return
-    end
-
-    -- Get the current selection
+    -- Get the current entry directly
     local entry = action_state.get_selected_entry()
     if not entry then
         vim.notify("No file selected", vim.log.levels.WARN)
@@ -258,8 +253,8 @@ local function add_telescope_grep_results_to_aider()
 
     -- Try to find existing aider REPL first
     local repl_exists = false
-    for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-        local name = vim.api.nvim_buf_get_name(bufnr)
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        local name = vim.api.nvim_buf_get_name(buf)
         if name:match("aider$") then
             repl_exists = true
             break
@@ -277,8 +272,8 @@ local function add_telescope_grep_results_to_aider()
         vim.cmd(string.format('REPLExec $aider /add %s', filename))
     end
 
-    -- Close telescope after sending
-    actions.close(current_picker.prompt_bufnr)
+    -- Close telescope
+    actions.close(bufnr)
 end
 
 -- Return the module with functions exposed
