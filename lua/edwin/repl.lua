@@ -242,8 +242,14 @@ vim.keymap.set('n', '<leader>am', send_last_message_to_aider, { silent = true, d
 local function add_telescope_grep_results_to_aider()
     local action_state = require('telescope.actions.state')
     local actions = require('telescope.actions')
-    local bufnr = vim.api.nvim_get_current_buf()
     
+    -- Get the current picker and prompt buffer
+    local current_picker = action_state.get_current_picker()
+    if not current_picker then
+        vim.notify("No active telescope picker", vim.log.levels.ERROR)
+        return
+    end
+
     -- Get the current entry directly
     local entry = action_state.get_selected_entry()
     if not entry then
@@ -272,8 +278,8 @@ local function add_telescope_grep_results_to_aider()
         vim.cmd(string.format('REPLExec $aider /add %s', filename))
     end
 
-    -- Close telescope
-    actions.close(bufnr)
+    -- Close telescope using the prompt_bufnr from the current picker
+    actions.close(current_picker.prompt_bufnr)
 end
 
 -- Return the module with functions exposed
