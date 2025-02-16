@@ -239,20 +239,19 @@ vim.keymap.set('n', '<leader>ar', add_rg_files_to_aider, { silent = true, desc =
 vim.keymap.set('n', '<leader>am', send_last_message_to_aider, { silent = true, desc = "Send last message to aider" })
 
 -- Function to add telescope grep results to aider
-local function add_telescope_grep_results_to_aider()
+local function add_telescope_grep_results_to_aider(prompt_bufnr)
     local action_state = require('telescope.actions.state')
-    local actions = require('telescope.actions')
     
-    -- Get the current picker and prompt buffer
-    local current_picker = action_state.get_current_picker()
-    if not current_picker then
+    -- Get the current picker
+    local picker = action_state.get_current_picker(prompt_bufnr)
+    if not picker then
         vim.notify("No active telescope picker", vim.log.levels.ERROR)
         return
     end
 
-    -- Get the current entry directly
-    local entry = action_state.get_selected_entry()
-    if not entry then
+    -- Get the current selection
+    local selection = picker:get_selection()
+    if not selection then
         vim.notify("No file selected", vim.log.levels.WARN)
         return
     end
@@ -272,14 +271,21 @@ local function add_telescope_grep_results_to_aider()
         vim.cmd('sleep 500m') -- Wait for REPL to start
     end
 
-    -- Send file to aider
-    local filename = entry.filename or entry[1]
+    -- Get filename and send to aider
+    local filename = selection.filename or selection[1]
     if filename then
-        vim.cmd(string.format('REPLExec $aider /add %s', filename))
+        -- Store the command to execute
+        local cmd = string.format('REPLExec $aider /add %s', filename)
+        
+        -- Close telescope by closing the prompt buffer
+        if prompt_bufnr and vim.api.nvim_buf_is_valid(prompt_bufnr) then
+            vim.api.nvim_buf_delete(prompt_bufnr, { force = true })
+            -- Execute the command after a short delay
+            vim.defer_fn(function()
+                vim.cmd(cmd)
+            end, 10)
+        end
     end
-
-    -- Close telescope using the prompt_bufnr from the current picker
-    actions.close(current_picker.prompt_bufnr)
 end
 
 -- Return the module with functions exposed

@@ -6,13 +6,13 @@ require('telescope').setup({
     defaults = {
         mappings = {
             i = {
-                ["<C-a>"] = function()
-                    require('edwin.repl').add_telescope_grep_results_to_aider()
+                ["<C-a>"] = function(prompt_bufnr)
+                    require('edwin.repl').add_telescope_grep_results_to_aider(prompt_bufnr)
                 end
             },
             n = {
-                ["<C-a>"] = function()
-                    require('edwin.repl').add_telescope_grep_results_to_aider()
+                ["<C-a>"] = function(prompt_bufnr)
+                    require('edwin.repl').add_telescope_grep_results_to_aider(prompt_bufnr)
                 end
             }
         }
