@@ -19,6 +19,7 @@ require('mason-lspconfig').setup({
     "lua_ls",
     "jdtls",
     "ruff",
+    "gopls",
   },
   handlers = {
     function(server_name)
