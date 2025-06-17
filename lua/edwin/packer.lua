@@ -72,43 +72,8 @@ return require('packer').startup(function(use)
   use 'lewis6991/gitsigns.nvim'
   use 'vim-scripts/dbext.vim'
   use 'onsails/lspkind.nvim'
-  use {
-    'milanglacier/yarepl.nvim',
-    config = function()
-      local yarepl = require('yarepl')
-      yarepl.setup {
-        buflisted = true,
-        scratch = true,
-        ft = 'REPL',
-        wincmd = 'vertical botright 80 split',
-        metas = {
-          aider = {
-            cmd = "aider --chat-language English --architect --model sonnet --editor-model sonnet --yes-always",
-            pattern = {
-              prompt = "Human: ",
-              continue = "Assistant: "
-            },
-            type = "stdio",
-            formatter = 'trim_empty_lines'
-          },
-          aichat = { cmd = 'aichat', formatter = 'bracketed_pasting' },
-          radian = { cmd = 'radian', formatter = 'bracketed_pasting_no_final_new_line' },
-          ipython = { cmd = 'ipython', formatter = 'bracketed_pasting' },
-          python = { cmd = 'python', formatter = 'trim_empty_lines' },
-          R = { cmd = 'R', formatter = 'trim_empty_lines' },
-          bash = { cmd = 'bash', formatter = vim.fn.has('linux') == 1 and 'bracketed_pasting' or 'trim_empty_lines' },
-          zsh = { cmd = 'zsh', formatter = 'bracketed_pasting' },
-        },
-        close_on_exit = true,
-        scroll_to_bottom_after_sending = true,
-        format_repl_buffers_names = true,
-        os = {
-          windows = {
-            send_delayed_cr_after_sending = true,
-          },
-        },
-      }
-    end
-  }
+
+  -- Augment.vim for AI-augmented development
+  use 'augmentcode/augment.vim'
 
 end)

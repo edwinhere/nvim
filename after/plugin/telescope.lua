@@ -1,23 +1,8 @@
 local builtin = require('telescope.builtin')
 local actions = require('telescope.actions')
 
--- Setup telescope with custom mappings
-require('telescope').setup({
-    defaults = {
-        mappings = {
-            i = {
-                ["<C-a>"] = function(prompt_bufnr)
-                    require('edwin.repl').add_telescope_grep_results_to_aider(prompt_bufnr)
-                end
-            },
-            n = {
-                ["<C-a>"] = function(prompt_bufnr)
-                    require('edwin.repl').add_telescope_grep_results_to_aider(prompt_bufnr)
-                end
-            }
-        }
-    }
-})
+-- Setup telescope
+require('telescope').setup({})
 
 vim.keymap.set('n', '<leader>e', builtin.find_files, {})
 vim.keymap.set('n', '<leader>gf', builtin.git_files, {})

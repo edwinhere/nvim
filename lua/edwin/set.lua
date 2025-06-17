@@ -65,8 +65,6 @@ vim.keymap.set('', '<leader>x', ':bn<CR>', { silent = false })
 vim.keymap.set('', '<leader>w', ':bn<CR>', { silent = false })
 -- Buffer Close
 vim.keymap.set('', '<leader>c', ':bd<CR>', { silent = false })
--- Add current file to aider
-vim.keymap.set('n', '<leader>aa', ':!aider %<CR>', { silent = false })
 -- Clean Search
 vim.keymap.set('n', '<leader><space>', ':noh<cr>', { silent = true })
 -- Switching Windows

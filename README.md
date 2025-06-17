@@ -107,12 +107,13 @@ This document outlines all keybindings and their functionalities in this Neovim 
 | `N`               | Normal | Previous search result (centered) |
 | `<leader><space>` | Normal | Clear search highlighting |
 
-## REPL
+## AI Assistant (Augment)
 
-| Keybinding   | Mode   | Description                    |
-|--------------|--------|--------------------------------|
-| `<leader>ai` | Normal | Start aider REPL              |
-| `<leader>aa` | Normal | Add all open files to aider   |
+| Keybinding   | Mode          | Description                    |
+|--------------|---------------|--------------------------------|
+| `<leader>ac` | Normal/Visual | Chat with Augment AI           |
+| `<leader>an` | Normal        | Start new Augment chat         |
+| `<leader>at` | Normal        | Toggle Augment chat panel      |
 
 ## Notes
 - The leader key in this configuration is set to `,`
