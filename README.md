@@ -393,6 +393,130 @@ python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
+## Java Development
+
+### Building & Running
+| Keybinding   | Mode   | Description              |
+|--------------|--------|--------------------------|
+| `<leader>jb` | Normal | Build Java project      |
+| `<leader>jr` | Normal | Run Java project        |
+| `<leader>jc` | Normal | Compile current Java file |
+| `<leader>jR` | Normal | Run current Java file    |
+
+### Maven Commands
+| Keybinding   | Mode   | Description              |
+|--------------|--------|--------------------------|
+| `<leader>mc` | Normal | Maven clean              |
+| `<leader>mC` | Normal | Maven compile            |
+| `<leader>mt` | Normal | Maven test               |
+| `<leader>mp` | Normal | Maven package            |
+| `<leader>mi` | Normal | Maven install            |
+| `<leader>me` | Normal | Maven exec:java          |
+
+### Gradle Commands
+| Keybinding   | Mode   | Description              |
+|--------------|--------|--------------------------|
+| `<leader>gc` | Normal | Gradle clean             |
+| `<leader>gC` | Normal | Gradle compile           |
+| `<leader>gt` | Normal | Gradle test              |
+| `<leader>gb` | Normal | Gradle build             |
+| `<leader>gr` | Normal | Gradle run               |
+
+### Testing
+| Keybinding   | Mode   | Description              |
+|--------------|--------|--------------------------|
+| `<leader>jt` | Normal | Run Java tests          |
+| `<leader>jtf`| Normal | Run tests for current file |
+| `<leader>jnt`| Normal | Run nearest Java test (JDTLS) |
+| `<leader>jnc`| Normal | Run Java test class (JDTLS) |
+
+### JDTLS Code Actions
+| Keybinding   | Mode   | Description              |
+|--------------|--------|--------------------------|
+| `<leader>jo` | Normal | Organize imports         |
+| `<leader>jv` | Normal | Extract variable         |
+| `<leader>jV` | Normal | Extract variable (visual) |
+| `<leader>jm` | Normal | Extract method           |
+| `<leader>jM` | Normal | Extract method (visual)  |
+| `<leader>jc` | Normal | Extract constant         |
+| `<leader>ju` | Normal | Update project config    |
+
+### Debugging
+| Keybinding   | Mode   | Description              |
+|--------------|--------|--------------------------|
+| `<leader>jd` | Normal | Java Debug continue      |
+| `<leader>jD` | Normal | Java Toggle breakpoint   |
+| `<leader>jdr`| Normal | Java Debug REPL          |
+| `<leader>jdl`| Normal | Java Debug run last      |
+
+### Dependency Management
+| Keybinding   | Mode   | Description              |
+|--------------|--------|--------------------------|
+| `<leader>jdm`| Normal | Show dependencies        |
+
+### JAR Operations
+| Keybinding   | Mode   | Description              |
+|--------------|--------|--------------------------|
+| `<leader>jj` | Normal | Create JAR file          |
+| `<leader>jJ` | Normal | Run JAR file             |
+
+### Code Generation
+| Keybinding   | Mode   | Description              |
+|--------------|--------|--------------------------|
+| `<leader>jg` | Normal | Generate class template  |
+
+### Spring Boot Development
+| Keybinding   | Mode   | Description              |
+|--------------|--------|--------------------------|
+| `<leader>spr`| Normal | Spring Boot run (Maven)  |
+| `<leader>spg`| Normal | Spring Boot run (Gradle) |
+| `<leader>spt`| Normal | Spring Boot test (Maven) |
+| `<leader>spb`| Normal | Spring Boot build image (Maven) |
+
+### Features
+- **Eclipse JDT Language Server** with advanced Java support
+- **Automatic project detection** (Maven, Gradle, or plain Java)
+- **Code completion** with intelligent suggestions
+- **Refactoring tools** (extract method, variable, constant)
+- **Import organization** and dependency management
+- **JUnit/TestNG integration** through JDTLS for test execution
+- **Debugging support** with breakpoints and REPL
+- **Maven and Gradle** build system integration
+- **Spring Boot** development support
+- **Code formatting** with Google Java Style (configurable)
+- **JAR creation and execution** tools
+- **Auto-indentation** with 4-space tabs
+- **Syntax-based code folding**
+- **Graceful degradation** - Features only activate when tools are installed
+
+### Prerequisites
+Install Java development tools:
+```bash
+# Install Java (JDK 11 or higher recommended)
+# macOS: brew install openjdk@11 or openjdk@17
+# Ubuntu: sudo apt install openjdk-11-jdk or openjdk-17-jdk
+# Windows: Download from Oracle or use OpenJDK
+
+# Set JAVA_HOME environment variable
+export JAVA_HOME=/path/to/your/java/installation
+
+# Install Maven (optional, for Maven projects)
+# macOS: brew install maven
+# Ubuntu: sudo apt install maven
+# Windows: Download from maven.apache.org
+
+# Install Gradle (optional, for Gradle projects)
+# macOS: brew install gradle
+# Ubuntu: sudo apt install gradle
+# Windows: Download from gradle.org
+
+# Verify installation
+java --version
+javac --version
+mvn --version  # if Maven installed
+gradle --version  # if Gradle installed
+```
+
 ## Environment Setup Guide
 
 ### Initial Setup
@@ -472,6 +596,32 @@ pip install flask       # For Flask development
 :TSInstall! python
 ```
 
+#### Java Development
+```bash
+# Install Java JDK (11 or higher recommended)
+# macOS: brew install openjdk@17
+# Ubuntu: sudo apt install openjdk-17-jdk
+# Windows: Download from Oracle or use OpenJDK
+
+# Set JAVA_HOME environment variable
+export JAVA_HOME=/path/to/your/java/installation
+
+# Install build tools (optional but recommended)
+# Maven:
+# macOS: brew install maven
+# Ubuntu: sudo apt install maven
+
+# Gradle:
+# macOS: brew install gradle
+# Ubuntu: sudo apt install gradle
+
+# In Neovim:
+:PackerSync
+:Mason
+# Install: jdtls (Java LSP server will be auto-configured)
+:TSInstall! java
+```
+
 ### Final Setup Steps
 1. **Start Neovim** and run `:PackerSync`
 2. **Install LSP servers** via `:Mason`
@@ -511,3 +661,4 @@ This configuration uses **safe module loading** with `pcall()` to prevent crashe
 - Run `:TSInstall! haskell` to ensure Haskell treesitter parser
 - Run `:TSInstall! javascript typescript tsx` for Node.js development
 - Run `:TSInstall! python` for Python development
+- Run `:TSInstall! java` for Java development

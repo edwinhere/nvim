@@ -104,6 +104,10 @@ return require('packer').startup(function(use)
   use 'psf/black'                      -- Python formatter
   use 'charliermarsh/ruff-lsp'         -- Python linter/formatter
 
+  -- Java plugins
+  use 'mfussenegger/nvim-jdtls'        -- Java LSP with advanced features
+  use 'mfussenegger/nvim-dap'          -- Debug Adapter Protocol (already included but needed for Java)
+
   -- Node.js/JavaScript/TypeScript plugins
   use 'microsoft/vscode-js-debug' -- Node.js debugging
   use 'nvim-neotest/neotest-jest'   -- Jest test adapter
