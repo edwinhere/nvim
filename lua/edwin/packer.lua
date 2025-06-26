@@ -98,4 +98,19 @@ return require('packer').startup(function(use)
   }
   use 'nvim-neotest/neotest-go'    -- Go test adapter
 
+  -- Python plugins
+  use 'mfussenegger/nvim-dap-python'   -- Python debugging
+  use 'nvim-neotest/neotest-python'    -- Python test adapter
+  use 'psf/black'                      -- Python formatter
+  use 'charliermarsh/ruff-lsp'         -- Python linter/formatter
+
+  -- Node.js/JavaScript/TypeScript plugins
+  use 'microsoft/vscode-js-debug' -- Node.js debugging
+  use 'nvim-neotest/neotest-jest'   -- Jest test adapter
+  use 'marilari88/neotest-vitest' -- Vitest test adapter
+  use 'jose-elias-alvarez/null-ls.nvim' -- Formatting and linting
+  use 'MunifTanjim/prettier.nvim'   -- Prettier integration
+  use 'vuki656/package-info.nvim'   -- Package.json management
+  use 'davidmh/cspell.nvim'         -- Spell checking for code
+
 end)

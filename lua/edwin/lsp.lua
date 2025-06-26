@@ -32,7 +32,64 @@ pcall(function()
     },
   })
 end)
-pcall(function() lspconfig.ruff.setup({}) end)
+pcall(function() 
+  lspconfig.ruff.setup({
+    init_options = {
+      settings = {
+        args = {"--ignore=E501"}  -- Ignore line length errors
+      }
+    }
+  })
+end)
+pcall(function() 
+  lspconfig.pyright.setup({
+    settings = {
+      python = {
+        analysis = {
+          autoSearchPaths = true,
+          diagnosticMode = "workspace",
+          useLibraryCodeForTypes = true,
+          typeCheckingMode = "basic"
+        }
+      }
+    }
+  })
+end)
+pcall(function() 
+  lspconfig.ts_ls.setup({
+    settings = {
+      typescript = {
+        inlayHints = {
+          includeInlayParameterNameHints = 'all',
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        }
+      },
+      javascript = {
+        inlayHints = {
+          includeInlayParameterNameHints = 'all',
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        }
+      }
+    }
+  })
+end)
+pcall(function() 
+  lspconfig.eslint.setup({
+    settings = {
+      workingDirectory = { mode = 'auto' }
+    }
+  })
+end)
 pcall(function() lspconfig.jdtls.setup({}) end)
 pcall(function() 
   lspconfig.hls.setup({
