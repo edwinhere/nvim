@@ -19,7 +19,19 @@ local lspconfig = require('lspconfig')
 
 -- Only setup servers that are actually available
 pcall(function() lspconfig.lua_ls.setup({}) end)
-pcall(function() lspconfig.gopls.setup({}) end)
+pcall(function() 
+  lspconfig.gopls.setup({
+    settings = {
+      gopls = {
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true,
+        gofumpt = true,
+      },
+    },
+  })
+end)
 pcall(function() lspconfig.ruff.setup({}) end)
 pcall(function() lspconfig.jdtls.setup({}) end)
 pcall(function() 

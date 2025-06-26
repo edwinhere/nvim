@@ -83,4 +83,19 @@ return require('packer').startup(function(use)
   use 'neovimhaskell/haskell-vim'  -- Better Haskell syntax highlighting
   use 'alx741/vim-hindent'         -- Haskell indentation
 
+  -- Go plugins
+  use 'fatih/vim-go'               -- Go development tools
+  use 'mfussenegger/nvim-dap'      -- Debug Adapter Protocol
+  use 'leoluz/nvim-dap-go'         -- Go debugging support
+  use {
+    'nvim-neotest/neotest',        -- Test runner
+    requires = {
+      'nvim-neotest/nvim-nio',     -- Required dependency
+      'nvim-lua/plenary.nvim',
+      'antoinemadec/FixCursorHold.nvim',
+      'nvim-treesitter/nvim-treesitter'
+    }
+  }
+  use 'nvim-neotest/neotest-go'    -- Go test adapter
+
 end)

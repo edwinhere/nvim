@@ -116,7 +116,103 @@ This document outlines all keybindings and their functionalities in this Neovim 
 | `<leader>cv` | Normal | Start Claude Code in verbose mode |
 | `<leader>cn` | Normal | Start new Claude Code chat     |
 
+## Go Development
+
+### Building & Running
+| Keybinding   | Mode   | Description        |
+|--------------|--------|--------------------| 
+| `<leader>gb` | Normal | Build Go project   |
+| `<leader>gr` | Normal | Run Go main        |
+
+### Testing
+| Keybinding   | Mode   | Description              |
+|--------------|--------|--------------------------|
+| `<leader>gt` | Normal | Run Go tests             |
+| `<leader>gT` | Normal | Run Go test function     |
+| `<leader>gc` | Normal | Toggle Go coverage       |
+| `<leader>tn` | Normal | Run nearest test         |
+| `<leader>tf` | Normal | Run file tests          |
+| `<leader>ts` | Normal | Test summary             |
+
+### Debugging
+| Keybinding   | Mode   | Description        |
+|--------------|--------|--------------------| 
+| `<leader>gd` | Normal | Debug continue     |
+| `<leader>gD` | Normal | Toggle breakpoint  |
+
+### Go Commands
+- `:GoTest` - Run tests
+- `:GoTestFunc` - Test function under cursor
+- `:GoBuild` - Build with error list
+- `:GoRun` - Run current file
+- `:GoCoverage` - Show coverage
+- `:GoDoc` - Show documentation
+- `:GoRename` - Rename symbol
+- `:GoFillStruct` - Fill struct literals
+- `:GoInstallBinaries` - Install Go tools
+
+### Features
+- Auto-formatting with `goimports` on save
+- Static analysis via gopls
+- Syntax highlighting for Go constructs
+- Unused parameter detection
+- Import management
+- Code completion and diagnostics
+
+## Haskell Development
+
+### Building & Running
+| Keybinding   | Mode   | Description              |
+|--------------|--------|--------------------------|
+| `<leader>hc` | Normal | Compile with GHC         |
+| `<leader>hr` | Normal | Run with runhaskell      |
+| `<leader>hi` | Normal | Open GHCi REPL          |
+
+### Cabal Projects
+| Keybinding   | Mode   | Description        |
+|--------------|--------|--------------------|
+| `<leader>cb` | Normal | Build project      |
+| `<leader>ct` | Normal | Run tests          |
+| `<leader>cr` | Normal | Run executable     |
+
+### Stack Projects
+| Keybinding   | Mode   | Description        |
+|--------------|--------|--------------------|
+| `<leader>sb` | Normal | Stack build        |
+| `<leader>st` | Normal | Stack test         |
+| `<leader>sr` | Normal | Stack run          |
+| `<leader>sg` | Normal | Stack GHCi         |
+
+### Formatting
+| Keybinding   | Mode   | Description              |
+|--------------|--------|--------------------------|
+| `<leader>hf` | Normal | Format with Ormolu       |
+| `<leader>f`  | Normal | LSP formatting           |
+
+### Features
+- Haskell Language Server (HLS) integration
+- Advanced syntax highlighting (forall, mdo, proc, patterns)
+- Auto-indentation with hindent (runs on save)
+- Ormolu formatting support
+- Real-time error diagnostics
+- Code completion and hover documentation
+- Cabal and Stack project support
+
+### Prerequisites
+Install Haskell toolchain:
+```bash
+ghcup install ghc
+ghcup install cabal
+ghcup install stack
+ghcup install hls
+cabal install ormolu
+cabal install hindent
+```
+
 ## Notes
 - The leader key in this configuration is set to `,`
 - Some commands may require specific plugins to be installed
 - Visual mode keybindings can be used after selecting text (v)
+- Run `:PackerSync` after adding new plugins
+- Run `:GoInstallBinaries` to install Go development tools
+- Run `:TSInstall! haskell` to ensure Haskell treesitter parser
