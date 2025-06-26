@@ -107,13 +107,14 @@ This document outlines all keybindings and their functionalities in this Neovim 
 | `N`               | Normal | Previous search result (centered) |
 | `<leader><space>` | Normal | Clear search highlighting |
 
-## AI Assistant (Augment)
+## AI Assistant (Claude Code)
 
-| Keybinding   | Mode          | Description                    |
-|--------------|---------------|--------------------------------|
-| `<leader>ac` | Normal/Visual | Chat with Augment AI           |
-| `<leader>an` | Normal        | Start new Augment chat         |
-| `<leader>at` | Normal        | Toggle Augment chat panel      |
+| Keybinding   | Mode   | Description                    |
+|--------------|--------|--------------------------------|
+| `<C-,>`      | Normal | Toggle Claude Code terminal    |
+| `<leader>cc` | Normal | Continue Claude Code conversation |
+| `<leader>cv` | Normal | Start Claude Code in verbose mode |
+| `<leader>cn` | Normal | Start new Claude Code chat     |
 
 ## Notes
 - The leader key in this configuration is set to `,`

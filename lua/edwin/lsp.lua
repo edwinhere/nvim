@@ -11,25 +11,33 @@ lsp_zero.on_attach(function(client, bufnr)
   lsp_zero.default_keymaps({ buffer = bufnr })
 end)
 
--- to learn how to use mason.nvim
--- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guide/integrate-with-mason-nvim.md
+-- Setup mason without automatic LSP configuration
 require('mason').setup({})
-require('mason-lspconfig').setup({
-  ensure_installed = {
-    "lua_ls",
-    "jdtls",
-    "ruff",
-    "gopls",
-  },
-  handlers = {
-    function(server_name)
-      require('lspconfig')[server_name].setup({})
-    end,
-  },
-})
+
+-- Setup LSP servers manually without mason-lspconfig
+local lspconfig = require('lspconfig')
+
+-- Only setup servers that are actually available
+pcall(function() lspconfig.lua_ls.setup({}) end)
+pcall(function() lspconfig.gopls.setup({}) end)
+pcall(function() lspconfig.ruff.setup({}) end)
+pcall(function() lspconfig.jdtls.setup({}) end)
+pcall(function() 
+  lspconfig.hls.setup({
+    cmd = { vim.fn.expand('~/.ghcup/bin/haskell-language-server-wrapper'), '--lsp' },
+    filetypes = { 'haskell', 'lhaskell', 'cabal' },
+    settings = {
+      haskell = {
+        formattingProvider = "ormolu"
+      }
+    }
+  })
+end)
 
 local cmp = require('cmp')
 local cmp_action = require('lsp-zero').cmp_action()
+
+local lspkind = require('lspkind')
 
 cmp.setup({
   sources = {
@@ -41,12 +49,7 @@ cmp.setup({
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-f>'] = cmp_action.luasnip_jump_forward(),
     ['<C-b>'] = cmp_action.luasnip_jump_backward(),
-  }
-})
-
-local lspkind = require('lspkind')
-
-cmp.setup({
+  },
   formatting = {
     format = lspkind.cmp_format({
       mode = 'symbol',

@@ -73,7 +73,14 @@ return require('packer').startup(function(use)
   use 'vim-scripts/dbext.vim'
   use 'onsails/lspkind.nvim'
 
-  -- Augment.vim for AI-augmented development
-  use 'augmentcode/augment.vim'
+  -- Claude Code integration
+  use {
+    'greggh/claude-code.nvim',
+    requires = { 'nvim-lua/plenary.nvim' }
+  }
+
+  -- Haskell plugins
+  use 'neovimhaskell/haskell-vim'  -- Better Haskell syntax highlighting
+  use 'alx741/vim-hindent'         -- Haskell indentation
 
 end)
