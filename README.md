@@ -124,7 +124,7 @@ This document outlines all keybindings and their functionalities in this Neovim 
 |--------------|--------|--------------------------------|
 | `<leader>Ao` | Normal | Open Aider                     |
 | `<leader>Am` | Normal | Add modified files to Aider    |
-| `<leader>af` | Normal | Find files to add to Aider (opens file in buffer) |
+| `<leader>af` | Normal | Add files to Aider (supports multi-selection with Tab) |
 
 ## Go Development
 
