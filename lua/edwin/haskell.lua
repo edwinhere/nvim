@@ -45,7 +45,10 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Configure Treesitter for Haskell
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
-    -- Ensure Haskell parser is installed
-    vim.cmd('TSInstall! haskell')
+    -- Check if Haskell parser is installed before installing
+    local parsers = require('nvim-treesitter.parsers')
+    if not parsers.has_parser('haskell') then
+      vim.cmd('TSInstall haskell')
+    end
   end,
 })

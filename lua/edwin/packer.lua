@@ -106,15 +106,15 @@ return require('packer').startup(function(use)
 
   -- Java plugins
   use 'mfussenegger/nvim-jdtls'        -- Java LSP with advanced features
-  use 'mfussenegger/nvim-dap'          -- Debug Adapter Protocol (already included but needed for Java)
 
   -- Node.js/JavaScript/TypeScript plugins
   use 'microsoft/vscode-js-debug' -- Node.js debugging
   use 'nvim-neotest/neotest-jest'   -- Jest test adapter
   use 'marilari88/neotest-vitest' -- Vitest test adapter
-  use 'jose-elias-alvarez/null-ls.nvim' -- Formatting and linting
+  use 'nvimtools/none-ls.nvim' -- Formatting and linting (fork of null-ls)
   use 'MunifTanjim/prettier.nvim'   -- Prettier integration
   use 'vuki656/package-info.nvim'   -- Package.json management
   use 'davidmh/cspell.nvim'         -- Spell checking for code
+
 
 end)

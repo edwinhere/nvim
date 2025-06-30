@@ -63,11 +63,10 @@ if ok_prettier then
   })
 end
 
--- null-ls setup for additional formatting/linting (only if available)
+-- none-ls setup for additional formatting/linting (only if available)
 local ok_null_ls, null_ls = pcall(require, "null-ls")
 if ok_null_ls then
-  null_ls.setup({
-  sources = {
+  local sources = {
     -- JavaScript/TypeScript
     null_ls.builtins.formatting.prettier.with({
       filetypes = { 
@@ -75,20 +74,19 @@ if ok_null_ls then
         "vue", "css", "scss", "less", "html", "json", "yaml", "markdown" 
       },
     }),
-    null_ls.builtins.diagnostics.eslint,
-    null_ls.builtins.code_actions.eslint,
-    
-    -- Spell checking (only if cspell is available)
-    null_ls.builtins.diagnostics.cspell.with({
-      condition = function(utils)
-        return utils.root_has_file({ ".cspell.json", "cspell.json", ".cspell.config.js" })
-          and vim.fn.executable("cspell") == 1
-      end,
-      diagnostics_postprocess = function(diagnostic)
-        diagnostic.severity = vim.diagnostic.severity.HINT
-      end,
-    }),
-    },
+  }
+  
+  -- Add eslint sources only if eslint executable is available
+  if vim.fn.executable("eslint") == 1 then
+    table.insert(sources, null_ls.builtins.diagnostics.eslint)
+    table.insert(sources, null_ls.builtins.code_actions.eslint)
+  end
+  
+  -- Note: cspell builtin is not available in none-ls
+  -- For spell checking, consider using 'davidmh/cspell.nvim' plugin directly
+  
+  null_ls.setup({
+    sources = sources,
   })
 end
 
