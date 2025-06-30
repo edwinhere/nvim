@@ -11,15 +11,23 @@ require('telescope').setup({})
 -- Custom picker to add files to Aider
 local function aider_add_files()
   pickers.new({}, {
-    prompt_title = "Add Files to Aider",
+    prompt_title = "Add Files to Aider (Tab to select multiple, Enter to add)",
     finder = finders.new_oneshot_job({"git", "ls-files"}, {}),
     sorter = conf.generic_sorter({}),
     attach_mappings = function(prompt_bufnr, map)
       actions.select_default:replace(function()
-        local selection = state.get_selected_entry()
+        local picker = state.get_current_picker(prompt_bufnr)
+        local selections = picker:get_multi_selection()
+        local current_selection = state.get_selected_entry()
+        
+        -- If no multi-selection, use current selection
+        if #selections == 0 and current_selection then
+          selections = {current_selection}
+        end
+        
         actions.close(prompt_bufnr)
-        if selection then
-          local filename = selection[1]
+        
+        if #selections > 0 then
           -- Find aider terminal buffer
           local aider_buf = nil
           for _, buf in ipairs(vim.api.nvim_list_bufs()) do
@@ -31,9 +39,15 @@ local function aider_add_files()
           end
           
           if aider_buf then
-            -- Send /add command to aider terminal
-            vim.api.nvim_chan_send(vim.api.nvim_buf_get_var(aider_buf, "terminal_job_id"), "/add " .. filename .. "\n")
-            vim.notify("Added " .. filename .. " to aider", vim.log.levels.INFO)
+            local filenames = {}
+            for _, selection in ipairs(selections) do
+              table.insert(filenames, selection[1])
+            end
+            
+            -- Send /add command with all selected files
+            local add_command = "/add " .. table.concat(filenames, " ") .. "\n"
+            vim.api.nvim_chan_send(vim.api.nvim_buf_get_var(aider_buf, "terminal_job_id"), add_command)
+            vim.notify("Added " .. #filenames .. " file(s) to aider: " .. table.concat(filenames, ", "), vim.log.levels.INFO)
           else
             vim.notify("Aider terminal not found. Please open aider first with <leader>ao", vim.log.levels.WARN)
           end

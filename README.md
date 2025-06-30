@@ -83,6 +83,11 @@ This document outlines all keybindings and their functionalities in this Neovim 
 | Keybinding   | Mode   | Description        |
 |--------------|--------|--------------------|
 | `<leader>sh` | Normal | Open terminal      |
+| `<C-[>`      | Terminal | Escape to normal mode |
+| `<C-w>h`     | Terminal | Move to left window |
+| `<C-w>j`     | Terminal | Move to bottom window |
+| `<C-w>k`     | Terminal | Move to top window |
+| `<C-w>l`     | Terminal | Move to right window |
 
 ## Clipboard Operations
 
