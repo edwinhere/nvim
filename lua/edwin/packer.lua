@@ -79,6 +79,12 @@ return require('packer').startup(function(use)
     requires = { 'nvim-lua/plenary.nvim' }
   }
 
+  -- Aider integration
+  use {
+    'joshuavial/aider.nvim',
+    requires = { 'nvim-lua/plenary.nvim' }
+  }
+
   -- Haskell plugins
   use 'neovimhaskell/haskell-vim'  -- Better Haskell syntax highlighting
   use 'alx741/vim-hindent'         -- Haskell indentation

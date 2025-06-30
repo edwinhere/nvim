@@ -118,6 +118,14 @@ This document outlines all keybindings and their functionalities in this Neovim 
 | `<leader>cv` | Normal | Start Claude Code in verbose mode |
 | `<leader>cn` | Normal | Start new Claude Code chat     |
 
+## AI Pair Programming (Aider)
+
+| Keybinding   | Mode   | Description                    |
+|--------------|--------|--------------------------------|
+| `<leader>Ao` | Normal | Open Aider                     |
+| `<leader>Am` | Normal | Add modified files to Aider    |
+| `<leader>af` | Normal | Find files to add to Aider (opens file in buffer) |
+
 ## Go Development
 
 ### Building & Running
